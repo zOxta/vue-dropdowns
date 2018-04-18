@@ -1,16 +1,16 @@
 <template>
     <div class="btn-group">
-        <li @click="toggleMenu()" class="dropdown-toggle" v-if="selectedOption.name !== undefined">
+        <li @click="toggleMenu()" class="v-dropdown-toggle" v-if="selectedOption.name !== undefined">
           {{ selectedOption.name }}
           <span class="caret"></span>
         </li>
 
-        <li @click="toggleMenu()" class="dropdown-toggle" v-if="selectedOption.name === undefined">
+        <li @click="toggleMenu()" class="v-dropdown-toggle" v-if="selectedOption.name === undefined">
           Please select an item
           <span class="caret"></span>
         </li>
 
-        <ul class="dropdown-menu" :class="{ 'hide' : !showMenu}">
+        <ul class="v-dropdown-menu" v-if="showMenu">
             <li v-for="option in options">
                 <a href="javascript:void(0)" @click="updateOption(option)">
                     {{ option.name }}
@@ -71,7 +71,7 @@
         }
     }
 
-    .dropdown-toggle {
+    .v-dropdown-toggle {
         color: #636b6f;
         min-width: 160px;
         padding: 10px;
@@ -95,11 +95,7 @@
         }
     }
 
-    .hide {
-      display: none;
-    }
-
-    .dropdown-menu {
+    .v-dropdown-menu {
       position: absolute;
       top: 100%;
       left: 0;
@@ -118,7 +114,7 @@
       background-clip: padding-box;
     }
 
-    .dropdown-menu > li > a {
+    .v-dropdown-menu > li > a {
         padding: 10px 30px;
         display: block;
         clear: both;
@@ -134,7 +130,7 @@
         }
     }
 
-    .dropdown-menu > li {
+    .v-dropdown-menu > li {
       overflow: hidden;
       width: 100%;
       position: relative;
