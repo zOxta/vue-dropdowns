@@ -1,13 +1,13 @@
 <template>
     <div class="btn-group">
         <li @click="toggleMenu()" class="v-dropdown-toggle" v-if="selectedOption.name !== undefined">
-          {{ selectedOption.name }}
-          <span class="caret"></span>
+            {{ selectedOption.name }}
+            <span class="caret"></span>
         </li>
 
         <li @click="toggleMenu()" class="v-dropdown-toggle" v-if="selectedOption.name === undefined">
-          Please select an item
-          <span class="caret"></span>
+            Please select an option
+            <span class="caret"></span>
         </li>
 
         <ul class="v-dropdown-menu" v-if="showMenu">
@@ -25,7 +25,7 @@
         data() {
             return {
                 selectedOption: {
-                  name: '',
+                    name: ''
                 },
                 showMenu: false,
             }
@@ -38,18 +38,33 @@
         },
 
         mounted() {
+            let that = this;
+
             this.selectedOption = this.selected;
+
+            window.addEventListener('click', function (e) {
+                // Clicked outside the dropdown
+                if (!that.$el.contains(e.target)) {
+                    that.showMenu = false;
+                }
+            })
+        },
+
+        watch: {
+            selected() {
+                this.selectedOption = this.selected;
+            }
         },
 
         methods: {
             updateOption(option) {
                 this.selectedOption = option;
-                this.showMenu = false;
+                this.showMenu       = false;
                 this.$emit('updateOption', this.selectedOption);
             },
 
             toggleMenu() {
-              this.showMenu = !this.showMenu;
+                this.showMenu = !this.showMenu;
             }
         }
     }
@@ -90,28 +105,28 @@
         border-radius: 0;
 
         &:hover {
-          background: #e1e1e1;
-          cursor: pointer;
+            background: #e1e1e1;
+            cursor: pointer;
         }
     }
 
     .v-dropdown-menu {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      z-index: 1000;
-      float: left;
-      min-width: 160px;
-      padding: 5px 0;
-      margin: 2px 0 0;
-      list-style: none;
-      font-size: 14px;
-      text-align: left;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-      background-clip: padding-box;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        float: left;
+        min-width: 160px;
+        padding: 5px 0;
+        margin: 2px 0 0;
+        list-style: none;
+        font-size: 14px;
+        text-align: left;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        background-clip: padding-box;
     }
 
     .v-dropdown-menu > li > a {
@@ -131,24 +146,24 @@
     }
 
     .v-dropdown-menu > li {
-      overflow: hidden;
-      width: 100%;
-      position: relative;
-      margin: 0
+        overflow: hidden;
+        width: 100%;
+        position: relative;
+        margin: 0;
     }
 
     .caret {
-      display: relative;
-      width: 0;
-      position: relative;
-      top: 10px;
-      height: 0;
-      margin-left: 2px;
-      vertical-align: middle;
-      border-top: 4px dashed;
-      border-top: 4px solid \9;
-      border-right: 4px solid transparent;
-      border-left: 4px solid transparent;
-      float: right;
+        display: relative;
+        width: 0;
+        position: relative;
+        top: 10px;
+        height: 0;
+        margin-left: 2px;
+        vertical-align: middle;
+        border-top: 4px dashed;
+        border-top: 4px solid;
+        border-right: 4px solid transparent;
+        border-left: 4px solid transparent;
+        float: right;
     }
 </style>
