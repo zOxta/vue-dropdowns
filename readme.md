@@ -13,15 +13,13 @@ No special dependencies, no jquery, no bootstrap, just VueJS and CSS goodness.
 # Installation
 
 ```shell
-$ npm install vue-dropdowns
-// OR
-$ yarn add vue-dropdowns
+$ npm install https://github.com/zOxta/vue-dropdowns/tarball/master
 ```
 
 # Usage
 
 ```html
-<dropdown :options="arrayOfObjects" :selected="object" v-on:updateOption="methodToRunOnSelect"></dropdown>
+<dropdown :options="arrayOfObjects" :selected="object" :truncate-selected-option="25" @updateOption="methodToRunOnSelect"></dropdown>
 
 <script>
 import dropdown from 'vue-dropdowns';
