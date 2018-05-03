@@ -1,7 +1,7 @@
 <template>
     <div class="btn-group">
         <li @click="toggleMenu()" class="v-dropdown-toggle" v-if="selectedOption.name !== undefined">
-            {{ selectedOption.name }}
+            {{ selectedOptionName }}
             <span class="caret"></span>
         </li>
 
@@ -35,6 +35,7 @@
                 type: [Array, Object]
             },
             selected: {},
+            truncateSelectedOption: 0,
         },
 
         mounted() {
@@ -48,6 +49,15 @@
                     that.showMenu = false;
                 }
             })
+        },
+
+        computed: {
+            selectedOptionName() {
+                if (this.truncateSelectedOption > 0 && this.selectedOption.name.length > this.truncateSelectedOption)
+                    return this.selectedOption.name.substring(0, this.truncateSelectedOption) + '...'
+
+                return this.selectedOption.name
+            }
         },
 
         watch: {
